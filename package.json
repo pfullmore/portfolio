@@ -1,0 +1,18 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Parker Fullmore's Portfolio",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site - no build required'",
+    "dev": "npx serve .",
+    "lint": "echo 'No linting configured'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.12"
+  },
+  "devDependencies": {},
+  "keywords": ["portfolio", "static"],
+  "author": "Parker Fullmore",
+  "license": "ISC"
+}
