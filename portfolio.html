@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Parker Fullmore</title>
+<!--
+  HOW TO CUSTOMIZE THIS FILE
+  1. Search for "REPLACE:" comments — each marks placeholder text/links to swap for your own.
+  2. Project cards are in the <section id="projects"> block — duplicate a .project-card to add more.
+     Each card has an empty <img src=""> (set src to your photo, e.g. "images/project1.jpg") and a
+     "View project" link (set href to a LinkedIn post, write-up, or repo).
+  3. Theater credits are in <section id="theater"> — duplicate a .credit-row to add more.
+  4. Two placeholder rows remain in the Theater credits — add your real production titles/companies/years.
+  5. Colors/fonts are defined once at the top of the <style> block as CSS variables.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ---- palette: blueprint drafting + stage-light ---- */
+    --ink:        #0B1220;   /* deep blueprint field */
+    --ink-2:      #101A2E;   /* panel on ink */
+    --blueprint:  #16324F;   /* mid blueprint blue */
+    --line:       #7FAFCB;   /* drafting linework */
+    --line-dim:   rgba(127,175,203,0.32);
+    --paper:      #EFE7D6;   /* aged cue-sheet paper */
+    --paper-2:    #E6DAC0;
+    --ink-on-paper: #241C10;
+    --amber:      #E8A33D;   /* practical / ghost-light */
+    --amber-2:    #F4C06B;
+    --curtain:    #7C2E3A;   /* velvet accent */
+    --curtain-2:  #9C4453;
+    --off-white:  #F4F1E9;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+    --dur: 0.5s;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    :root{ --dur: 0s; }
+    html{ scroll-behavior: auto !important; }
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--ink);
+    color: var(--off-white);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color: inherit; }
+  ::selection{ background: var(--amber); color: var(--ink); }
+
+  :focus-visible{
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* faint drafting grid used as a background texture */
+  .grid-bg{
+    background-image:
+      linear-gradient(var(--line-dim) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-dim) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-position: center top;
+    opacity: 0.16;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* ---------------- NAV ---------------- */
+  header.site-nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11,18,32,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line-dim);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    padding: 16px 28px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .nav-logo{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    color: var(--amber-2);
+  }
+  .nav-logo strong{
+    color: var(--off-white);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    margin-right: 10px;
+  }
+  nav.links{ display:flex; gap: 22px; flex-wrap: wrap; }
+  nav.links a{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--off-white);
+    opacity: 0.75;
+    transition: opacity var(--dur), color var(--dur);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+  }
+  nav.links a:hover{ opacity: 1; color: var(--amber-2); border-color: var(--amber); }
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    position: relative;
+    overflow: hidden;
+    padding: 96px 0 60px;
+    border-bottom: 1px solid var(--line-dim);
+  }
+  .hero-inner{
+    position: relative;
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (max-width: 860px){
+    .hero-inner{ grid-template-columns: 1fr; }
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber-2);
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 22px; height: 1px;
+    background: var(--amber);
+    display:inline-block;
+  }
+  h1.title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+  h1.title em{
+    font-style: italic;
+    font-weight: 500;
+    color: var(--amber-2);
+  }
+  .hero p.sub{
+    margin-top: 22px;
+    max-width: 46ch;
+    font-size: 1.06rem;
+    color: rgba(244,241,233,0.82);
+  }
+  .hero-actions{ display:flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 13px 22px;
+    border-radius: 2px;
+    transition: transform var(--dur), box-shadow var(--dur), background var(--dur);
+    display:inline-block;
+  }
+  .btn-primary{
+    background: var(--amber);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .btn-primary:hover{ background: var(--amber-2); transform: translateY(-2px); }
+  .btn-ghost{
+    border: 1px solid var(--line-dim);
+    color: var(--off-white);
+  }
+  .btn-ghost:hover{ border-color: var(--amber); color: var(--amber-2); transform: translateY(-2px); }
+
+  /* blueprint stage illustration */
+  .stage-drawing{ position: relative; }
+  .glow{
+    position:absolute;
+    left:50%; top:62%;
+    width: 220px; height: 220px;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(circle, rgba(232,163,61,0.32) 0%, rgba(232,163,61,0) 70%);
+    animation: flicker 4s ease-in-out infinite;
+  }
+  @keyframes flicker{
+    0%,100%{ opacity: 1; }
+    45%{ opacity: 0.75; }
+    50%{ opacity: 0.95; }
+    72%{ opacity: 0.8; }
+  }
+
+  /* ---------------- CUE SECTION HEADERS ---------------- */
+  section{ padding: 88px 0; border-bottom: 1px solid var(--line-dim); position: relative; }
+  .cue{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--amber-2);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h2.section-title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    max-width: 24ch;
+  }
+  .section-lede{
+    margin-top: 16px;
+    max-width: 58ch;
+    color: rgba(244,241,233,0.78);
+    font-size: 1.02rem;
+  }
+
+  .reveal{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible{ opacity: 1; transform: none; }
+
+  /* ---------------- ABOUT ---------------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 48px;
+    margin-top: 40px;
+    align-items: start;
+  }
+  @media (max-width: 860px){ .about-grid{ grid-template-columns: 1fr; } }
+  .about-grid p{ color: rgba(244,241,233,0.85); margin-bottom: 16px; max-width: 62ch; }
+  .spec-plate{
+    border: 1px solid var(--line-dim);
+    padding: 22px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+  }
+  .spec-plate .row{
+    display:flex; justify-content: space-between; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line-dim);
+    color: rgba(244,241,233,0.85);
+  }
+  .spec-plate .row:last-child{ border-bottom: none; }
+  .spec-plate .row span:first-child{ color: var(--amber-2); }
+
+  /* ---------------- PROJECTS ---------------- */
+  .project-grid{
+    margin-top: 44px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  @media (max-width: 980px){ .project-grid{ grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px){ .project-grid{ grid-template-columns: 1fr; } }
+
+  .project-card{
+    border: 1px solid var(--line-dim);
+    background: linear-gradient(180deg, var(--ink-2), var(--ink));
+    padding: 26px;
+    position: relative;
+    transition: border-color var(--dur), transform var(--dur), box-shadow var(--dur);
+  }
+  .project-card::before,
+  .project-card::after{
+    content:"";
+    position:absolute;
+    z-index: 2;
+    width: 12px; height: 12px;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    top: 8px; left: 8px;
+  }
+  .project-card::after{
+    top: auto; left: auto; bottom: 8px; right: 8px;
+    border-top: none; border-left: none;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+  .project-card:hover{
+    border-color: var(--amber);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+  }
+  .project-card .num{
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--amber-2);
+    letter-spacing: 0.08em;
+  }
+  .project-image{
+    aspect-ratio: 16 / 10;
+    margin: -26px -26px 20px -26px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line-dim);
+    background:
+      linear-gradient(var(--line-dim) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-dim) 1px, transparent 1px);
+    background-size: 18px 18px;
+    background-color: var(--ink-2);
+  }
+  .project-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .project-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--amber-2);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur), color var(--dur);
+  }
+  .project-link:hover{ border-color: var(--amber-2); color: var(--amber); }
+  .project-card h3{
+    font-family: var(--font-display);
+    font-size: 1.34rem;
+    font-weight: 600;
+    margin: 10px 0 10px;
+  }
+  .project-card p{ color: rgba(244,241,233,0.78); font-size: 0.96rem; margin-bottom: 16px; }
+  .tags{ display:flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .tag{
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--line-dim);
+    color: var(--line);
+    padding: 4px 9px;
+  }
+  .tech-plate{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: rgba(244,241,233,0.7);
+    border-top: 1px dashed var(--line-dim);
+    padding-top: 12px;
+  }
+  .tech-plate b{ color: var(--amber-2); font-weight: 500; }
+
+  /* ---------------- THEATER (playbill mode) ---------------- */
+  #theater{
+    background: var(--paper);
+    color: var(--ink-on-paper);
+  }
+  #theater .cue{ color: var(--curtain); }
+  #theater h2.section-title{ color: var(--ink-on-paper); }
+  #theater .section-lede{ color: rgba(36,28,16,0.72); }
+  .credit-row{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr 0.6fr;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--paper-2);
+    align-items: baseline;
+  }
+  @media (max-width: 700px){
+    .credit-row{ grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
+  }
+  .credit-row .show{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.18rem;
+  }
+  .credit-row .note{
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.74rem;
+    letter-spacing: 0.01em;
+    color: rgba(36,28,16,0.55);
+    margin-top: 4px;
+  }
+  .credit-row .role{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--curtain);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .credit-row .meta{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: rgba(36,28,16,0.6);
+    text-align: right;
+  }
+  @media (max-width: 700px){ .credit-row .meta{ text-align: left; } }
+  .credits-list{ margin-top: 40px; }
+
+  .awards-list{ margin-top: 48px; }
+  .awards-list h3{
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--curtain);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--paper-2);
+  }
+  .award-row{
+    display:grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--paper-2);
+  }
+  .award-row:last-child{ border-bottom: none; }
+  .award-row .yr{
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--curtain);
+  }
+  .award-row .desc{
+    font-size: 0.92rem;
+    color: rgba(36,28,16,0.82);
+  }
+
+  /* ---------------- SKILLS ---------------- */
+  .skills-grid{
+    margin-top: 44px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 780px){ .skills-grid{ grid-template-columns: 1fr; } }
+  .skills-col h3{
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber-2);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line-dim);
+  }
+  .skills-col.craft h3{ color: var(--curtain-2); }
+  .chip-list{ display:flex; flex-wrap:wrap; gap: 10px; }
+  .chip{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    border: 1px solid var(--line-dim);
+    padding: 8px 14px;
+    color: rgba(244,241,233,0.85);
+  }
+  .skills-col.craft .chip{
+    font-family: var(--font-display);
+    font-style: italic;
+    border-color: rgba(156,68,83,0.5);
+  }
+
+  /* ---------------- CONTACT ---------------- */
+  #contact{
+    border-bottom: none;
+    text-align:center;
+    padding: 110px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  #contact .glow{
+    top: 40%;
+    width: 340px; height: 340px;
+  }
+  #contact h2.section-title{
+    margin: 0 auto;
+    font-size: clamp(2rem, 4.2vw, 3rem);
+  }
+  #contact .section-lede{ margin-left:auto; margin-right:auto; }
+  #contact .hero-actions{ justify-content: center; margin-top: 34px; }
+
+  footer{
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: rgba(244,241,233,0.55);
+    padding: 26px 0 40px;
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-logo"><strong>Parker Fullmore</strong>DWG NO. 2026-001 · SCALE NTS</div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#theater">Theater</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="grid-bg"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <p class="eyebrow">Mechanical Engineering · Stage Performance</p>
+      <h1 class="title">Precision on paper.<br><em>Presence</em> on stage.</h1>
+      <p class="sub">Mechanical engineering student at UCF with hands-on experience in 3D modeling, FEA, and prototyping — plus a background as a professional stage performer. I'm drawn to themed entertainment, where technical precision and audience experience are the same problem.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">See the work</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="stage-drawing">
+      <div class="glow"></div>
+      <svg viewBox="0 0 620 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- proscenium arch -->
+        <rect x="90" y="40" width="380" height="290" rx="4" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+        <rect x="104" y="54" width="352" height="262" rx="2" fill="none" stroke="var(--line)" stroke-width="1" stroke-opacity="0.55"/>
+        <!-- rigging pipe -->
+        <line x1="90" y1="70" x2="470" y2="70" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 5" stroke-opacity="0.8"/>
+        <circle cx="160" cy="70" r="5" fill="none" stroke="var(--line)"/>
+        <circle cx="280" cy="70" r="5" fill="none" stroke="var(--line)"/>
+        <circle cx="400" cy="70" r="5" fill="none" stroke="var(--line)"/>
+        <!-- stage floor -->
+        <line x1="70" y1="330" x2="490" y2="330" stroke="var(--line)" stroke-width="1.5"/>
+        <!-- floor hatching -->
+        <g stroke="var(--line)" stroke-width="0.75" stroke-opacity="0.5">
+          <line x1="80" y1="330" x2="66" y2="344"/>
+          <line x1="110" y1="330" x2="96" y2="344"/>
+          <line x1="140" y1="330" x2="126" y2="344"/>
+          <line x1="170" y1="330" x2="156" y2="344"/>
+          <line x1="200" y1="330" x2="186" y2="344"/>
+          <line x1="230" y1="330" x2="216" y2="344"/>
+          <line x1="260" y1="330" x2="246" y2="344"/>
+          <line x1="290" y1="330" x2="276" y2="344"/>
+          <line x1="320" y1="330" x2="306" y2="344"/>
+          <line x1="350" y1="330" x2="336" y2="344"/>
+          <line x1="380" y1="330" x2="366" y2="344"/>
+          <line x1="410" y1="330" x2="396" y2="344"/>
+          <line x1="440" y1="330" x2="426" y2="344"/>
+          <line x1="470" y1="330" x2="456" y2="344"/>
+        </g>
+        <!-- ghost light -->
+        <line x1="280" y1="330" x2="280" y2="250" stroke="var(--amber-2)" stroke-width="1.5"/>
+        <circle cx="280" cy="240" r="12" fill="none" stroke="var(--amber-2)" stroke-width="1.5"/>
+        <line x1="266" y1="330" x2="294" y2="330" stroke="var(--amber-2)" stroke-width="2"/>
+        <!-- dimension line -->
+        <line x1="90" y1="380" x2="470" y2="380" stroke="var(--line)" stroke-width="1"/>
+        <line x1="90" y1="374" x2="90" y2="386" stroke="var(--line)" stroke-width="1"/>
+        <line x1="470" y1="374" x2="470" y2="386" stroke="var(--line)" stroke-width="1"/>
+        <text x="280" y="404" fill="var(--line)" font-family="IBM Plex Mono, monospace" font-size="12" text-anchor="middle">PROSCENIUM WIDTH — 42'-0"</text>
+        <!-- leader callouts -->
+        <line x1="470" y1="70" x2="498" y2="46" stroke="var(--line)" stroke-width="0.75" stroke-opacity="0.7"/>
+        <text x="502" y="46" fill="var(--line)" font-family="IBM Plex Mono, monospace" font-size="11">RIGGING PLOT</text>
+        <line x1="104" y1="200" x2="40" y2="200" stroke="var(--line)" stroke-width="0.75" stroke-opacity="0.7"/>
+        <text x="8" y="196" fill="var(--line)" font-family="IBM Plex Mono, monospace" font-size="11">SHOW CONTROL</text>
+        <line x1="400" y1="330" x2="440" y2="420" stroke="var(--line)" stroke-width="0.75" stroke-opacity="0.7"/>
+        <text x="440" y="438" fill="var(--line)" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle">GHOST LIGHT — ALWAYS ON</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap reveal">
+    <p class="cue">Cue 1 — About</p>
+    <h2 class="section-title">Two disciplines, one instinct for how things should feel.</h2>
+    <div class="about-grid">
+      <div>
+        <p>I'm a mechanical engineering student at UCF with hands-on experience in 3D modeling, design, FEA, and prototyping — and a less typical background as a professional stage performer. Those two worlds ask the same question in different languages: how do you make something complex feel effortless to the person experiencing it?</p>
+        <p>That question is what pulls me toward themed entertainment — a field where mechanical precision and audience experience have to hit their marks at the same time. I like projects where the technical constraint and the creative intent are the same problem.</p>
+        <p>This site collects a handful of projects that show how I work: detail-oriented, collaborative, and always thinking about the person on the other side of the mechanism — or the fourth wall.</p>
+      </div>
+      <div class="spec-plate">
+        <div class="row"><span>Education</span><span>B.S. Mechanical Engineering, UCF</span></div>
+        <div class="row"><span>Class of</span><span>2028 · GPA 3.42</span></div>
+        <div class="row"><span>Stage</span><span>Actor — Billy Elliot, Garden Theatre</span></div>
+        <div class="row"><span>Based in</span><span>Orlando, FL</span></div>
+        <div class="row"><span>Open to</span><span>Mechanical engineering / themed entertainment</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap reveal">
+    <p class="cue">Cue 2 — Projects</p>
+    <h2 class="section-title">Selected work</h2>
+    <p class="section-lede">A mix of academic and club projects, each one pairing a technical build with a bit of creative or experiential thinking.</p>
+
+    <div class="project-grid">
+
+      <article class="project-card">
+        <div class="project-image"><!-- REPLACE: set src to your project photo --><img src="" alt="Photo of the TEC Costume Cooler project"></div>
+        <p class="num">Cue 2.1</p>
+        <h3>TEC Costume Cooler</h3>
+        <div class="tags"><span class="tag">Thermal Design</span><span class="tag">Wearable Tech</span><span class="tag">Prototyping</span></div>
+        <p>Independent project developing a Peltier-based cooling device to help keep costumed cast members cool while performing — built from firsthand experience with what it's like to perform in a full costume.</p>
+        <div class="tech-plate"><b>Tools —</b> Thermoelectric (TEC) modules, CAD, thermal design</div>
+        <!-- REPLACE: link to a write-up, LinkedIn post, or repo for this project -->
+        <a class="project-link" href="#" target="_blank" rel="noopener">View project ↗</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-image"><!-- REPLACE: set src to your project photo --><img src="" alt="Photo of the Arcade Claw Machine project"></div>
+        <p class="num">Cue 2.2</p>
+        <h3>Arcade Claw Machine</h3>
+        <div class="tags"><span class="tag">ASME Club</span><span class="tag">Game Systems</span><span class="tag">Hardware + Software</span></div>
+        <p>Built with the ASME UCF Game Systems team — working on both the software and hardware mechanics behind an arcade-style claw machine, from mechanical actuation to control logic.</p>
+        <div class="tech-plate"><b>Tools —</b> Mechanical design, control systems, ASME UCF Chapter</div>
+        <!-- REPLACE: link to a write-up, LinkedIn post, or repo for this project -->
+        <a class="project-link" href="#" target="_blank" rel="noopener">View project ↗</a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-image"><!-- REPLACE: set src to your project photo --><img src="" alt="Photo of the Open Differential project"></div>
+        <p class="num">Cue 2.3</p>
+        <h3>Open Differential</h3>
+        <div class="tags"><span class="tag">Gear Design</span><span class="tag">Team Lead</span><span class="tag">3D Printing</span></div>
+        <p>First-engineering-course assignment to lead a team designing and prototyping a product built around gears. Drawing on a personal interest in motor vehicles, I chose to design and build a functional model of an open differential — leading the design process, modeling it in Fusion 360, contributing to the technical drawings, and handling all of the 3D-printed prototyping myself.</p>
+        <div class="tech-plate"><b>Tools —</b> Fusion 360, gear design &amp; tolerancing, 3D printing</div>
+        <!-- REPLACE: link to a write-up, LinkedIn post, or repo for this project -->
+        <a class="project-link" href="#" target="_blank" rel="noopener">View project ↗</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="theater">
+  <div class="wrap reveal">
+    <p class="cue">Cue 3 — Theater &amp; Live Experience</p>
+    <h2 class="section-title">Where the storytelling instinct comes from</h2>
+    <p class="section-lede">Before I was an engineer, I was on stage. Years of acting and dance taught me to think about timing, presence, and how an audience experiences a moment.</p>
+
+    <div class="credits-list">
+      <div class="credit-row">
+        <div class="show">Billy Elliot the Musical
+          <div class="note">One of only 265 boys worldwide to play the title role — youngest Billy ever cast, in the show's 14-year history</div>
+        </div>
+        <div class="role">Billy Elliot (title role)</div>
+        <div class="meta">Garden Theatre, Winter Garden, FL · 2019</div>
+      </div>
+      <div class="credit-row">
+        <div class="show">Why Dance! (documentary film)</div>
+        <div class="role">Featured Dancer</div>
+        <div class="meta">2019</div>
+      </div>
+      <div class="credit-row">
+        <div class="show">The Ballet School Performing Arts</div>
+        <div class="role">Dance Teacher &amp; Choreographer</div>
+        <div class="meta">2023 – 2024</div>
+      </div>
+    </div>
+
+    <div class="awards-list">
+      <h3>Awards &amp; Recognition</h3>
+      <div class="award-row"><div class="yr">2018</div><div class="desc">Young Artist Academy Award nomination — Best Performance in a Music Video, for "Our Hero" in George Watsky's "Love Letters"</div></div>
+      <div class="award-row"><div class="yr">2017</div><div class="desc">Best Child / Young Actor — London Independent Film Awards</div></div>
+      <div class="award-row"><div class="yr">2016</div><div class="desc">Perry Award for Outstanding Youth Actor in a Musical — Billy Elliot</div></div>
+      <div class="award-row"><div class="yr">2015</div><div class="desc">Mini Mr. Turn It Up Dance</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <p class="cue">Cue 4 — Skills</p>
+    <h2 class="section-title">The kit, from both sides of the curtain</h2>
+    <div class="skills-grid">
+      <div class="skills-col">
+        <h3>Engineering</h3>
+        <div class="chip-list">
+          <span class="chip">AutoCAD &amp; Fusion 360</span>
+          <span class="chip">Mechanical Design</span>
+          <span class="chip">Finite Element Analysis</span>
+          <span class="chip">Additive Manufacturing</span>
+          <span class="chip">C &amp; Python (basic)</span>
+          <span class="chip">MS Office Suite</span>
+        </div>
+      </div>
+      <div class="skills-col craft">
+        <h3>Performance</h3>
+        <div class="chip-list">
+          <span class="chip">Acting</span>
+          <span class="chip">Dance &amp; Choreography</span>
+          <span class="chip">Stage Presence</span>
+          <span class="chip">Ensemble Collaboration</span>
+          <span class="chip">Adaptability Under Pressure</span>
+          <span class="chip">Teamwork in Technical &amp; Creative Spaces</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="grid-bg"></div>
+  <div class="glow"></div>
+  <div class="wrap reveal">
+    <p class="cue">Cue 5 — Contact</p>
+    <h2 class="section-title">The ghost light stays on.</h2>
+    <p class="section-lede">Always glad to talk about mechanical engineering, themed entertainment, or anything that sits between the two.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:pjfullmore@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="#">Download resume</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/parker-fullmore">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© <span id="year"></span> Parker Fullmore — Mechanical Engineering + Performance</span>
+  <span>Sheet 01 of 01 · Rev A</span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+
+  if (prefersReduced) {
+    revealEls.forEach(el => el.classList.add('visible'));
+  } else if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
+</script>
+
+</body>
+</html>
